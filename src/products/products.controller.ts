@@ -22,6 +22,12 @@ export class ProductsController {
     return this.productsService.getProduct(+id);
   }
 
+  @Get(':tags')
+    findByTags(@Body() data: Partial<Product>): Promise<Product[]>{
+      const tags = data.tag;
+      return this.productsService.getProductsByTag(tags)
+    }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() data: Partial<Product>): Promise<Product> {
     return this.productsService.updateProduct(+id, data);

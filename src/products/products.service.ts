@@ -29,4 +29,14 @@ export class ProductsService {
   async deleteProduct(id: number): Promise<Product> {
     return this.prisma.product.delete({ where: { id } });
   }
+
+  async getProductsByTag(tags: string[]): Promise<Product[]> {
+    return this.prisma.product.findMany({
+      where: {
+        tag: {
+          equals: tags
+        }
+      }
+    });
+    }
 }
